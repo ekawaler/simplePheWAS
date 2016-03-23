@@ -36,19 +36,16 @@ explain_phewas_bon <- function(res,verbose){
   # Which parts of this table are we interested in explaining?
   results_des<-addPhewasDescription(res)
   signif_res <- results_des[results_des$bonferroni&!is.na(results_des$p),]
-  #print(dim(bonfer))
-  if (dim(signif_res[1])>0) {
+  if (dim(signif_res)[1]>0) {
     for (i in seq(1,dim(signif_res)[1])) {
-      print(paste("The SNP ",signif_res$snp[i]," is significantly associated with ",
-                  signif_res$phewas_description[i]," (PheWAS code ",signif_res$phewas_code[i],
-                  ") with a p-value of ",signif(signif_res$p[i], digits=3)," after Bonferroni correction.",
-                  sep=''))
-        if (verbose) {
-          print((paste("PheWAS code ",signif_res$phewas_code[i]," includes the following ICD-9 code(s): ",
-                       paste(phemap$icd9[phemap$phewas_code==signif_res$phewas_code[i]],collapse=', '),sep='')))
+      cat("The SNP ",signif_res$snp[i]," is significantly associated with ",
+          signif_res$phewas_description[i]," (PheWAS code ",signif_res$phewas_code[i],
+          ") with a p-value of ",signif(signif_res$p[i], digits=3)," after Bonferroni correction.\n",sep='')
+      if (verbose) {
+        cat("--> PheWAS code ",signif_res$phewas_code[i]," includes the following ICD-9 code(s): ",
+            paste(phemap$icd9[phemap$phewas_code==signif_res$phewas_code[i]],collapse=', '),"\n\n",sep='')
       }
     }
-
     print(signif_res)
   }
   else {print("No results significant with Bonferroni correction.")}
@@ -58,14 +55,14 @@ explain_phewas_fdr <- function(res,verbose){
   # Which parts of this table are we interested in explaining?
   results_des<-addPhewasDescription(res)
   signif_res <- results_des[results_des$fdr&!is.na(results_des$p),]
-  if (dim(signif_res[1])>0) {
+  if (dim(signif_res)[1]>0) {
     for (i in seq(1,dim(signif_res)[1])) {
-      print(paste("The SNP ",signif_res$snp[i]," is significantly associated with ",
-                  signif_res$phewas_description[i]," (PheWAS code ",signif_res$phewas_code[i],
-                  ") with a p-value of ",signif(signif_res$p[i], digits=3)," after FDR correction.",sep=''))
+      cat("The SNP ",signif_res$snp[i]," is significantly associated with ",
+                        signif_res$phewas_description[i]," (PheWAS code ",signif_res$phewas_code[i],
+                        ") with a p-value of ",signif(signif_res$p[i], digits=3)," after FDR correction.\n",sep='')
         if (verbose) {
-          print((paste("PheWAS code ",signif_res$phewas_code[i]," includes the following ICD-9 code(s): ",
-                       paste(phemap$icd9[phemap$phewas_code==signif_res$phewas_code[i]],collapse=', '),sep='')))
+          cat("--> PheWAS code ",signif_res$phewas_code[i]," includes the following ICD-9 code(s): ",
+                       paste(phemap$icd9[phemap$phewas_code==signif_res$phewas_code[i]],collapse=', '),"\n\n",sep='')
         }
     }
     print(signif_res)

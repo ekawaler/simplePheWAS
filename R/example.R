@@ -3,7 +3,7 @@
 
 ex_function <- function(){
   #Load the PheWAS package
-  library(RadPheWAS)
+  library(simplePheWAS)
   #Set the random seed so it is replicable
   set.seed(2)
   #Generate some example data
@@ -11,9 +11,9 @@ ex_function <- function(){
   #ex=generate_example(number_of_patients=3000,phenotypes_per_patient=10,code_to_enhance=c())
   #print(slice(ex$genotypes,1:10))
   #Extract the two parts from the returned list
-  id.icd9.count=testset3$id.icd9.count
+  id.icd9.count=ex$id.icd9.count
   #print(slice(id.icd9.count,1:10))
-  genotypes=testset3$genotypes
+  genotypes=ex$genotypes
   #id.icd9.count=read.csv('~/Desktop/Rotation 2/PheWAS_data/id.icd9.count.csv')
   #genotypes=read.table('~/Desktop/Rotation 2/PheWAS_data/genotypes',header=TRUE)
   #Create the PheWAS code table- translates the icd9s, adds
@@ -22,7 +22,7 @@ ex_function <- function(){
   #Run the PheWAS
   results=phewas_with_bonferroni(phenotypes,genotypes,alpha=0.10)
   #print(results[results$phenotype %in% c("335","764","327.71"),])
-  #print(slice(results,1:10))
+  print(slice(results,1:10))
   print(top_n(results,-10,p))
   #print(results[order(results$p)[1:10],])
   #Plot the results
