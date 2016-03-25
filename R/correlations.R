@@ -1,4 +1,4 @@
-summarization <- function(genotypes, phenotypes, results_d){
+summarization <- function(phenotypes, genotypes, results_d){
   sig=filter(results_d,bonferroni&!is.na(p))
   pw_codes=sig$phewas_code
   #print(sig)
