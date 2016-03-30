@@ -7,7 +7,7 @@ ex_function <- function(){
   #Set the random seed so it is replicable
   set.seed(2)
   #Generate some example data
-  #ex=generate_example(number_of_patients=3000, phenotypes_per_patient=10, code_to_enhance=c("335","764","327.1"))
+  ex=generate_example(number_of_patients=3000, phenotypes_per_patient=10, code_to_enhance=c("335","764","327.1"))
   #ex=generate_example(number_of_patients=3000,phenotypes_per_patient=10,code_to_enhance=c())
   #print(slice(ex$genotypes,1:10))
   #Extract the two parts from the returned list
@@ -23,8 +23,7 @@ ex_function <- function(){
   results=phewas_with_bonferroni(phenotypes,genotypes,alpha=0.10)
   #print(results[results$phenotype %in% c("335","764","327.71"),])
   print(slice(results,1:10))
-  print(top_n(results,-10,p))
-  #print(results[order(results$p)[1:10],])
+  print(results[order(results$p)[1:10],])
   #Plot the results
   print(phewas_manhattan(results))
   #Add PheWAS descriptions

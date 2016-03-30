@@ -1,25 +1,24 @@
-#phenotypePlot <-
-#  function(d, max.y,max.x, suggestive.line, significant.line,
-#           size.x.labels=9, size.y.labels=9, switch.axis=F, sort.by.value=F, sort.by.category.value=F,
-#           #annotation
-#           annotate.phenotype.description,
-#           annotate.angle=30, annotate.size=5, annotate.level,
-#           annotate.phenotype=F,
-#           annotate.snp.w.phenotype=F,
-#           annotate.snp=F, annotate.snp.angle=0,
-#           annotate.list, annotate.only.largest=T,
-#           #labels
-#           lc.labels=F,
-#           x.group.labels=T, x.phenotype.labels=F,
-#           sizes=F, direction=F, point.size=3,
-#           #plot characteristics
-#           use.color=T,
-#           color.palette,
-#           title= paste0("Phenotype Plot ", date()),
-#           x.axis.label="Phenotypes",
-#           y.axis.label="Values",
-#           y.axis.interval=5)
+phewas_manhattan <-
+  function(d, add.phewas.descriptions=T, ...) {
+    if(sum(c("phenotype","p") %in% names(d))<2 ) stop("Data input must contain columns phenotype and p.")
+    if(class(d$phenotype)!="character") {
+      if(class(d$phenotype)=="factor") {
+        warning("Factor phenotype input mapped to characters")
+        d$phenotype=as.character(d$phenotype)
+      } else {
+        stop("Non-character or non-factor phenotypes passed in, so an accurate phewas code mapping is not possible.")
+      }
+    }
+    #Check to see if it looks 0-padded
+    if(min(nchar(d$phenotype))<3) warning("Phenotypes with length <3 observed, ensure they are are 0-padded (e.g., \"008\")")
+    #Add the groups
+    d=addPhewasGroups(d)
 
-phewas_manhattan <- function(results){
-  phewasManhattan(results, annotate.angle=0, title=results$snp)
-}
+    #Call phenotype plot as normal.
+    if(add.phewas.descriptions) {
+      d=addPhewasDescription(d,for.plots=T)
+      phenotype_manhattan(d, annotate.phenotype.description=T,...)
+    } else {
+      phenotype_manhattan(d,...)
+    }
+  }
