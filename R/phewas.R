@@ -18,19 +18,24 @@ phewas_with_bonferroni<-
   function(phenotypes,genotypes, alpha=0.05, explain=TRUE, verbose=TRUE){
     res <- phewas(phenotypes,genotypes,cores=1,alpha=alpha,significance.threshold=c("bonferroni"))
     if (explain) {explain_phewas_bon(res,verbose)}
-    return(res)
+    View(res)
+    resplus <- add_phewas_description(res)
+    return(resplus)
   }
 
 phewas_with_fdr<-
   function(phenotypes,genotypes, alpha=0.05, explain=TRUE, verbose=TRUE){
     res <- phewas(phenotypes,genotypes,cores=1,alpha=alpha,significance.threshold=c("fdr"))
     if (explain) {explain_phewas_fdr(res,verbose)}
-    return(res)  }
+    resplus <- addPhewasDescription(res)
+    return(resplus)  }
 
 phewas_with_both<-
   function(phenotypes,genotypes, alpha=0.05, explain=TRUE, verbose=TRUE){
-    phewas(phenotypes,genotypes,cores=1,alpha=alpha,significance.threshold=c("fdr","bonferroni"))
-  }
+    res <- phewas(phenotypes,genotypes,cores=1,alpha=alpha,significance.threshold=c("fdr","bonferroni"))
+    resplus <- addPhewasDescription(res)
+    return(resplus)
+   }
 
 explain_phewas_bon <- function(res,verbose){
   # Which parts of this table are we interested in explaining?
