@@ -22,6 +22,5 @@ add_phewas_description <- function(data, keep.unmatched.rows=F,for.plots=F) {
   }
   data=merge(pd,data,by.x=names(pd)[1],by.y=name,all.y=keep.unmatched.rows)
   names(data)[names(data)=="phewas_code"] <- "phenotype"
-  View(data)
   data
 }

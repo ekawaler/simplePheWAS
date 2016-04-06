@@ -1,9 +1,9 @@
-summarization <- function(phenotypes, genotypes, results_d){
-  sig=filter(results_d,bonferroni&!is.na(p))
-  pw_codes=sig$phewas_code
+summarization <- function(phenotypes, genotypes, results){
+  sig=filter(results,bonferroni&!is.na(p))
+  pw_codes=sig$phenotype
   #print(sig)
   for (c in pw_codes){
-    result_row = sig[sig$phewas_code==c,]
+    result_row = sig[sig$phenotype==c,]
     cat("For PheWAS code ",c," (",result_row$phewas_description,"):\n",sep='')
     # % won't be the same for each code - doesn't count NAs
     cat("--> Patients in dataset with phenotype: ",result_row$n_cases," (",

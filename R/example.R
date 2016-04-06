@@ -25,14 +25,10 @@ ex_function <- function(){
   print(slice(results,1:10))
   print(results[order(results$p)[1:10],])
   #Plot the results
-  View(results)
   print(phewas_manhattan(results))
-  #Add PheWAS descriptions
-  #results_d=addPhewasDescription(results)
   #List the significant results
-  #results_d[results_d$bonferroni&!is.na(results_d$p),]
   results[results$bonferroni&!is.na(results$p),]
   #List the top 10 results
-  #results_d[order(results_d$p)[1:10],]
   results[order(results$p)[1:10],]
+  summarization(phenotypes, genotypes, results)
 }

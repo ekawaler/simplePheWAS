@@ -18,7 +18,6 @@ phewas_with_bonferroni<-
   function(phenotypes,genotypes, alpha=0.05, explain=TRUE, verbose=TRUE){
     res <- phewas(phenotypes,genotypes,cores=1,alpha=alpha,significance.threshold=c("bonferroni"))
     if (explain) {explain_phewas_bon(res,verbose)}
-    View(res)
     resplus <- add_phewas_description(res)
     return(resplus)
   }
