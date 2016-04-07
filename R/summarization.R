@@ -5,6 +5,7 @@ summarization_paragraph <- function(phenotypes, genotypes, results){
   pw_codes <- sig$phenotype
   for (c in pw_codes){
     result_row <- sig[sig$phenotype==c,]
+    cat("\n")
     cat("PheWAS code ",c," represents ",result_row$phewas_description,". ",sep='')
     # % won't be the same for each code - doesn't count NAs
     cat(result_row$n_cases," patients in the dataset, or ",
@@ -44,6 +45,7 @@ summarization_list <- function(phenotypes, genotypes, results){
   pw_codes <- sig$phenotype
   for (c in pw_codes){
     result_row <- sig[sig$phenotype==c,]
+    cat("\n")
     cat("For PheWAS code ",c," (",result_row$phewas_description,"):\n",sep='')
     # % won't be the same for each code - doesn't count NAs
     cat("--> Patients in dataset with phenotype: ",result_row$n_cases," (",
@@ -82,6 +84,7 @@ summarization_table <- function(phenotypes, genotypes, results){
     res <- left_join(tmp[,c("id",c)],genotypes,by="id")
     colnames(res)[2] <- result_row$phewas_description
     ctable <- table(res[,2:3])
+    cat("\n")
     print(ctable)
     cat("--> Odds Ratio: ",result_row$OR,"; p=",result_row$p,sep='')
     cat("\n\n")
