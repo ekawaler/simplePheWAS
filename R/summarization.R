@@ -82,7 +82,7 @@ summarization_table <- function(phenotypes, genotypes, results){
     res <- left_join(tmp[,c("id",c)],genotypes,by="id")
     colnames(res)[2] <- result_row$phewas_description
     ctable <- table(res[,2:3])
-    print(ctable)
+    ctable
     cat("--> Odds Ratio: ",result_row$OR,"; p=",result_row$p,sep='')
     cat("\n\n")
   }
