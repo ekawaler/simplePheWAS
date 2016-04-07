@@ -1,3 +1,6 @@
+# Allows the user to see which PheWAS codes encompass their
+# ICD9 code of interest.
+
 get_icd9_codes <- function(icd9_query=c("088.81")) {
   for (i9 in icd9_query) {
     # Get the PheWAS codes that associate with the ICD-9

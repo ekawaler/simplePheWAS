@@ -1,3 +1,6 @@
+# Makes sure to call the correct Manhattan plot builder (with the non-overlapping
+# point labels)
+
 phewas_manhattan <-
   function(d, add.phewas.descriptions=T, ...) {
     if(sum(c("phenotype","p") %in% names(d))<2 ) stop("Data input must contain columns phenotype and p.")

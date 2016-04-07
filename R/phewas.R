@@ -1,44 +1,33 @@
-#phewas <-
-#  function(phenotypes,genotypes,data,covariates=c(NA),adjustments=list(NA),
-#outcomes, predictors, cores=1, additive.genotypes=T,
-#           significance.threshold, alpha=0.05, unadjusted=F,
-#return.models=F, min.records=20, MASS.confint.level=NA,quick.confint.level) {
-#  }
-
-# What abstractions do I want to make here? Probably covariates, adjustments,
-# Significance threshold: significance.threshold=c("bonferroni")
-#thresh=match(c("p-value","bonferroni","fdr","simplem-genotype",
-#"simplem-phenotype","simplem-product")
-
-#S3/S4 objects. Like, a<-phewas(phenotypes,genotypes) then p_w_b(a)
-#chaining with magrittr?
-# Fails when PheWAS isn't used.
+# The actual PheWAS functions.
+# Can either use Bonferroni correction, FDR correction, or both,
+# depending on which function is called.
+# Currently no "explain" is available for the "both" option.
 
 phewas_with_bonferroni<-
-  function(phenotypes,genotypes, alpha=0.05, explain=TRUE, verbose=TRUE){
-    res <- phewas(phenotypes,genotypes,cores=1,alpha=alpha,significance.threshold=c("bonferroni"))
+  function(phenotypes,genotypes, alpha=0.05, explain=TRUE, verbose=TRUE, ...){
+    res <- phewas(phenotypes,genotypes,cores=1,alpha=alpha,significance.threshold=c("bonferroni"), ...)
     if (explain) {explain_phewas_bon(res,verbose)}
     resplus <- add_phewas_description(res)
     return(resplus)
   }
 
 phewas_with_fdr<-
-  function(phenotypes,genotypes, alpha=0.05, explain=TRUE, verbose=TRUE){
-    res <- phewas(phenotypes,genotypes,cores=1,alpha=alpha,significance.threshold=c("fdr"))
+  function(phenotypes,genotypes, alpha=0.05, explain=TRUE, verbose=TRUE, ...){
+    res <- phewas(phenotypes,genotypes,cores=1,alpha=alpha,significance.threshold=c("fdr"), ...)
     if (explain) {explain_phewas_fdr(res,verbose)}
     resplus <- addPhewasDescription(res)
-    return(resplus)  }
+    return(resplus)
+  }
 
 phewas_with_both<-
-  function(phenotypes,genotypes, alpha=0.05, explain=TRUE, verbose=TRUE){
-    res <- phewas(phenotypes,genotypes,cores=1,alpha=alpha,significance.threshold=c("fdr","bonferroni"))
+  function(phenotypes,genotypes, alpha=0.05, explain=TRUE, verbose=TRUE, ...){
+    res <- phewas(phenotypes,genotypes,cores=1,alpha=alpha,significance.threshold=c("fdr","bonferroni"), ...)
     resplus <- addPhewasDescription(res)
     return(resplus)
-   }
+  }
 
 explain_phewas_bon <- function(res,verbose){
-  # Which parts of this table are we interested in explaining?
-  results_des<-addPhewasDescription(res)
+  results_des <- addPhewasDescription(res)
   signif_res <- results_des[results_des$bonferroni&!is.na(results_des$p),]
   if (dim(signif_res)[1]>0) {
     for (i in seq(1,dim(signif_res)[1])) {
@@ -56,8 +45,7 @@ explain_phewas_bon <- function(res,verbose){
 }
 
 explain_phewas_fdr <- function(res,verbose){
-  # Which parts of this table are we interested in explaining?
-  results_des<-addPhewasDescription(res)
+  results_des <- addPhewasDescription(res)
   signif_res <- results_des[results_des$fdr&!is.na(results_des$p),]
   if (dim(signif_res)[1]>0) {
     for (i in seq(1,dim(signif_res)[1])) {
