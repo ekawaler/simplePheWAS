@@ -5,6 +5,7 @@ summarization_paragraph <- function(phenotypes, genotypes, results){
   pw_codes <- sig$phenotype
   for (c in pw_codes){
     result_row <- sig[sig$phenotype==c,]
+    print(result_row)
     cat("\n")
     cat("PheWAS code ",c," represents ",result_row$phewas_description,". ",sep='')
     # % won't be the same for each code - doesn't count NAs
@@ -93,10 +94,11 @@ summarization_table <- function(phenotypes, genotypes, results){
 
 summarization_all <- function(phenotypes,genotypes,results){
   sig <- filter(results,bonferroni&!is.na(p))
+  message(colnames(results))
   pw_codes <- sig$phenotype
   for (c in pw_codes){
     result_row <- sig[sig$phenotype==c,]
-    cat("For PheWAS code ",c," (",result_row$phewas_description,"):\n",sep='')
+    cat("For PheWAS code ",c," (",result_row$phenotype,"):\n",sep='')
     # % won't be the same for each code - doesn't count NAs
     cat("--> Patients in dataset with phenotype: ",result_row$n_cases," (",
         round(result_row$n_cases*100/result_row$n_total,2),"% of total)\n",sep='')
@@ -122,7 +124,6 @@ summarization_all <- function(phenotypes,genotypes,results){
         round(100*ctable["TRUE","2"]/sum(ctable[,"2"]),2),"% have ",
         result_row$phewas_description,"\n",sep='')
     cat("\n")
-    print(phewas_manhattan(results))
-    cat("\n")
   }
+  print(phewas_manhattan(results))
 }
