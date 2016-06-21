@@ -94,7 +94,6 @@ summarization_table <- function(phenotypes, genotypes, results){
 
 summarization_all <- function(phenotypes,genotypes,results){
   sig <- filter(results,bonferroni&!is.na(p))
-  message(colnames(results))
   pw_codes <- sig$phenotype
   for (c in pw_codes){
     result_row <- sig[sig$phenotype==c,]
