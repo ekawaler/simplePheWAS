@@ -2,12 +2,13 @@
 # Can either use Bonferroni correction, FDR correction, or both,
 # depending on which function is called.
 # Currently no "explain" is available for the "both" option.
+# Maybe break this up into several files for documentation
 
 phewas_with_bonferroni<-
   function(phenotypes,genotypes, alpha=0.05, explain=TRUE, verbose=TRUE, ...){
     res <- phewas(phenotypes,genotypes,cores=1,alpha=alpha,significance.threshold=c("bonferroni"), ...)
     if (explain) {explain_phewas_bon(res,verbose)}
-    resplus <- add_phewas_description(res)
+    resplus <- addPhewasDescription(res, for.plots=TRUE)
     return(resplus)
   }
 

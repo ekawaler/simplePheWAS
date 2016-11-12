@@ -1,0 +1,654 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass{article}
+
+    
+    
+    \usepackage{graphicx} % Used to insert images
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{color} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage{ulem} % ulem is needed to support strikethroughs (\sout)
+    
+
+    
+    
+    \definecolor{orange}{cmyk}{0,0.4,0.8,0.2}
+    \definecolor{darkorange}{rgb}{.71,0.21,0.01}
+    \definecolor{darkgreen}{rgb}{.12,.54,.11}
+    \definecolor{myteal}{rgb}{.26, .44, .56}
+    \definecolor{gray}{gray}{0.45}
+    \definecolor{lightgray}{gray}{.95}
+    \definecolor{mediumgray}{gray}{.8}
+    \definecolor{inputbackground}{rgb}{.95, .95, .85}
+    \definecolor{outputbackground}{rgb}{.95, .95, .95}
+    \definecolor{traceback}{rgb}{1, .95, .95}
+    % ansi colors
+    \definecolor{red}{rgb}{.6,0,0}
+    \definecolor{green}{rgb}{0,.65,0}
+    \definecolor{brown}{rgb}{0.6,0.6,0}
+    \definecolor{blue}{rgb}{0,.145,.698}
+    \definecolor{purple}{rgb}{.698,.145,.698}
+    \definecolor{cyan}{rgb}{0,.698,.698}
+    \definecolor{lightgray}{gray}{0.5}
+    
+    % bright ansi colors
+    \definecolor{darkgray}{gray}{0.25}
+    \definecolor{lightred}{rgb}{1.0,0.39,0.28}
+    \definecolor{lightgreen}{rgb}{0.48,0.99,0.0}
+    \definecolor{lightblue}{rgb}{0.53,0.81,0.92}
+    \definecolor{lightpurple}{rgb}{0.87,0.63,0.87}
+    \definecolor{lightcyan}{rgb}{0.5,1.0,0.83}
+    
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{PheWAS Example}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=blue,
+      linkcolor=darkorange,
+      citecolor=darkgreen,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    \section{Module: Using PheWAS}\label{module-using-phewas}
+
+    \subsubsection{Table of Contents}\label{table-of-contents}
+
+\protect\hyperlink{1.-Intro-to-PheWAS-and-this-Module}{1. Intro to
+PheWAS and this Module}\\
+\protect\hyperlink{2.-Installing-Libraries}{2. Installing Libraries}\\
+\protect\hyperlink{3.-Getting-Data}{3. Getting Data}\\
+\hspace*{0.333em}\hspace*{0.333em}\hspace*{0.333em}\hspace*{0.333em}\protect\hyperlink{3a.-Generating-Sample-Data}{a.
+Generating Sample Data}\\
+\hspace*{0.333em}\hspace*{0.333em}\hspace*{0.333em}\hspace*{0.333em}\protect\hyperlink{3b.-Importing-Data}{b.
+Importing Data}\\
+\protect\hyperlink{4.-Preparing-the-Data}{4. Preparing the Data}\\
+\protect\hyperlink{5.-Running-PheWAS-Analysis}{5. Running PheWAS
+Analysis}\\
+\protect\hyperlink{6.-Viewing-Results}{6. Viewing Results}\\
+\hspace*{0.333em}\hspace*{0.333em}\hspace*{0.333em}\hspace*{0.333em}\protect\hyperlink{6a.-Results:-Plotting}{a.
+Results: Plotting}\\
+\hspace*{0.333em}\hspace*{0.333em}\hspace*{0.333em}\hspace*{0.333em}\protect\hyperlink{6b.-Results:-Manually-Extracting-Results}{b.
+Results: Manually Extracting Results}\\
+\hspace*{0.333em}\hspace*{0.333em}\hspace*{0.333em}\hspace*{0.333em}\protect\hyperlink{6c.-Results:-Built-In-Summarization-Function}{c.
+Results: Built-In Summarization Function}\\
+\protect\hyperlink{7.-Exercises}{7. Exercises}\\
+\protect\hyperlink{Appendix:-Converting-ICD-9-Codes-to-PheWAS-Codes}{Appendix}
+
+    \subsection{1. Intro to PheWAS and this
+Module}\label{intro-to-phewas-and-this-module}
+
+Phenome-wide association scans, or PheWAS, entail scanning a set of
+phenotypes to determine whether any are significantly associated with a
+genotype of interest. We believe this type of study holds tremendous
+potential in the current era of personalized medicine -- the ability to
+tell from a patient's genetic makeup what diseases they are most at risk
+for will be an integral part of health care going forward.
+
+The R library we are using in this module, simplePheWAS, is built on top
+of the PheWAS library created by the Josh Denny lab at Vanderbilt
+{[}1{]}. It is meant to be a simplification of the code for use by
+clinicians.
+
+Here, we go through an example of how this code can be used. First, data
+acquisition - either by generating an artificial dataset with some
+signal added in, or using a real-world dataset already set up. Then, we
+run the PheWAS code and look at the results in a couple of different
+ways.
+
+{[}1{]} Carroll RJ, Bastarache L, Denny JC. R PheWAS: data analysis and
+plotting tools for phenome-wide association studies in the R
+environment. Bioinformatics. 2014 Aug 15;30(16):2375-6
+
+    \subsection{2. Installing Libraries}\label{installing-libraries}
+
+First, we need to install all of the necessary libraries. Devtools
+allows us to grab the most recent version of a library directly from its
+Github repository; specifically, we need both the original PheWAS
+package and the simplePheWAS package installed. If you've already done
+this, you can skip this step.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}2}]:} \PY{c+c1}{\PYZsh{} Why do I need to force? It really seems to have trouble downloading these libraries.}
+        \PY{k+kn}{library}\PY{p}{(}devtools\PY{p}{)} \PY{c+c1}{\PYZsh{} Should I have them install devtools, or assume it\PYZsq{}s there?}
+        \PY{c+c1}{\PYZsh{}install\PYZus{}github(\PYZsq{}PheWAS/PheWAS\PYZsq{})}
+        \PY{c+c1}{\PYZsh{}library(PheWAS)}
+        install\PYZus{}github\PY{p}{(}\PY{l+s}{\PYZsq{}}\PY{l+s}{ekawaler/simplePheWAS\PYZsq{}}\PY{p}{,}force\PY{o}{=}\PY{k+kc}{TRUE}\PY{p}{)}
+        \PY{k+kn}{library}\PY{p}{(}simplePheWAS\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Warning message:
+“package ‘devtools’ was built under R version 3.2.5”Downloading GitHub repo ekawaler/simplePheWAS@master
+from URL https://api.github.com/repos/ekawaler/simplePheWAS/zipball/master
+Installing simplePheWAS
+'/Library/Frameworks/R.framework/Resources/bin/R' --no-site-file --no-environ  \textbackslash{}
+  --no-save --no-restore --quiet CMD INSTALL  \textbackslash{}
+  '/private/var/folders/1b/xv3r99rj5k9b0lh\_5h2w\_xh00000gq/T/RtmpGdo7l4/devtools39d93869bff1/ekawaler-simplePheWAS-96b5b5c'  \textbackslash{}
+  --library='/Users/Emily/Library/R/3.2/library' --install-tests 
+
+Loading required package: PheWAS
+Loading required package: dplyr
+Warning message:
+“package ‘dplyr’ was built under R version 3.2.5”
+Attaching package: ‘dplyr’
+
+The following objects are masked from ‘package:stats’:
+
+    filter, lag
+
+The following objects are masked from ‘package:base’:
+
+    intersect, setdiff, setequal, union
+
+Loading required package: tidyr
+Warning message:
+“package ‘tidyr’ was built under R version 3.2.5”Loading required package: ggplot2
+Loading required package: parallel
+    \end{Verbatim}
+
+    Optional step: If you're using the dataset-generation example, there is
+a considerable amount of randomness. The set.seed() function ensures
+that the random number generator generates the same numbers each time so
+that the experiment is more reproducible.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}1}]:} \PY{k+kp}{set.seed}\PY{p}{(}\PY{l+m}{1}\PY{p}{)}
+\end{Verbatim}
+
+    \subsection{3. Getting Data}\label{getting-data}
+
+There are two ways to get data for use with this PheWAS module. First,
+there is a function that will allow you to generate some sample data,
+with one or more phenotypes artificially enhanced for the sample SNP.
+Secondly, you can import your own data - we have included sample data
+that you can use to practice the import here.
+
+\subsubsection{3a. Generating Sample
+Data}\label{a.-generating-sample-data}
+
+Here is where you can generate example data. Parameters are number of
+patients, number of phenotypes per patient, and a code or set of codes
+that will be artificially enhanced in the dataset. If you will be using
+your own dataset, skip this step.
+
+The output is two dataframes: one (ex\$genotypes) that has the genotype
+for each patient at the SNP in question, and one (ex\$id.icd9.count)
+that has the actual example data - the ID, ICD9 code, and the number of
+times that code appeared in their record (If you're interested in how
+`count' is generated, it's to a Poisson distribution with λ=4.)
+
+The slice() function allows us to look at any subset of rows from a
+table. Here, we can see what our genotype and ICD-9 tables look once
+they've been created.
+
+Because they're the output of a single function, in order to access
+either data frame, we need to use a somewhat odd construction (prefacing
+their names with ``ex\$''). This is ugly, so we change their names.
+
+Challenge: Change some of the parameters here and see what happens. If
+you want the code to run faster, have fewer patients in the dataset! Or
+try adding or deleting a code from the list of codes to enhance - using
+more than three is not recommended, however. If you've got an ICD-9 code
+you'd like to convert to a PheWAS code and enhance, skip to
+\protect\hyperlink{Appendix:-Converting-ICD-9-Codes-to-PheWAS-Codes}{the
+Appendix} where we show you a simple way to do this.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}8}]:} ex\PY{o}{=}generate\PYZus{}example\PY{p}{(}number\PYZus{}of\PYZus{}patients\PY{o}{=}\PY{l+m}{2000}\PY{p}{,} phenotypes\PYZus{}per\PYZus{}patient\PY{o}{=}\PY{l+m}{10}\PY{p}{,} 
+                            code\PYZus{}to\PYZus{}enhance\PY{o}{=}\PY{k+kt}{c}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{335\PYZdq{}}\PY{p}{,}\PY{l+s}{\PYZdq{}}\PY{l+s}{764\PYZdq{}}\PY{p}{)}\PY{p}{)}
+        slice\PY{p}{(}ex\PY{o}{\PYZdl{}}genotypes\PY{p}{,}\PY{l+m}{1}\PY{o}{:}\PY{l+m}{5}\PY{p}{)} \PY{c+c1}{\PYZsh{} Allows us to view rows 1\PYZhy{}5 of the dataset}
+        slice\PY{p}{(}ex\PY{o}{\PYZdl{}}id.icd9.count\PY{p}{,}\PY{l+m}{10}\PY{o}{:}\PY{l+m}{20}\PY{p}{)} \PY{c+c1}{\PYZsh{} Allows us to view rows 10\PYZhy{}20 of the dataset}
+        
+        \PY{c+c1}{\PYZsh{} Making the two main tables more easily accessible by changing their names.}
+        genotypes\PY{o}{=}ex\PY{o}{\PYZdl{}}genotypes
+        id.icd9.count\PY{o}{=}ex\PY{o}{\PYZdl{}}id.icd9.count
+\end{Verbatim}
+\texttt{\color{outcolor}Out[{\color{outcolor}8}]:}
+    
+    \begin{tabular}{r|ll}
+  & id & rsEXAMPLE\\
+\hline
+    1 & 1 & 1\\
+    2 & 2 & 1\\
+    3 & 3 & 1\\
+    4 & 4 & 1\\
+    5 & 5 & 1\\
+\end{tabular}
+
+    
+\texttt{\color{outcolor}Out[{\color{outcolor}8}]:}
+    
+    \begin{tabular}{r|lll}
+  & id & icd9 & count\\
+\hline
+    1 & 315 & 022.2 & 5\\
+    2 & 315 & 008.4 & 8\\
+    3 & 315 & 004.1 & 8\\
+    4 & 315 & 009.1 & 2\\
+    5 & 315 & 005.3 & 4\\
+    6 & 315 & 008.66 & 5\\
+    7 & 315 & 008.1 & 4\\
+    8 & 315 & 008.61 & 3\\
+    9 & 315 & 005.89 & 2\\
+    10 & 315 & 007.9 & 3\\
+    11 & 315 & 008.69 & 7\\
+\end{tabular}
+
+    
+
+    \subsubsection{3b. Importing Data}\label{b.-importing-data}
+
+Instead of generating artificial data, if you have your own dataset, you
+can import it with the read.table() function. (This step replaces the
+one above; if you artificially generated your data in the previous step,
+skip this one.) The data should be in a text or CSV file, formatted as
+in the example ICD-9 file:
+
+id,icd9,count\\
+1146,383.00,2\\
+4113,482.9,5\\
+6240,153.4,6
+
+Or, if you choose to separate with spaces or tabs instead of commas, as
+in this example genotypes file:
+
+id rs8050136\_A\\
+1 1\\
+2 0\\
+3 2
+
+The separator is an argument that gets passed into the read.table
+function. It defaults to any whitespace; if you have data separated by
+some other character, you'll need to use it (add the argument sep=``,''
+if the separator is a comma, for instance). ``header=TRUE'' tells R that
+your data has a header row and should not try to count that as data.
+
+The slice() function allows us to look at any subset of rows from a
+table. Here, we can see what our genotype and ICD-9 tables look once
+they've been imported.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} id.icd9.count\PY{o}{=}read.table\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{./data/id.icd9.count\PYZdq{}}\PY{p}{,}header\PY{o}{=}\PY{k+kc}{TRUE}\PY{p}{,}sep\PY{o}{=}\PY{l+s}{\PYZdq{}}\PY{l+s}{,\PYZdq{}}\PY{p}{)}
+        genotypes\PY{o}{=}read.table\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{./data/genotypes\PYZdq{}}\PY{p}{,}header\PY{o}{=}\PY{k+kc}{TRUE}\PY{p}{)}
+        slice\PY{p}{(}genotypes\PY{p}{,}\PY{l+m}{1}\PY{o}{:}\PY{l+m}{5}\PY{p}{)} \PY{c+c1}{\PYZsh{} Allows us to view rows 1\PYZhy{}5 of the genotypes dataset}
+        slice\PY{p}{(}id.icd9.count\PY{p}{,}\PY{l+m}{10}\PY{o}{:}\PY{l+m}{20}\PY{p}{)} \PY{c+c1}{\PYZsh{} Allows us to view rows 10\PYZhy{}20 of the id.icd9.count dataset}
+\end{Verbatim}
+
+    \subsection{4. Preparing the Data}\label{preparing-the-data}
+
+Here is where we create the PheWAS input table. This maps the ICD-9
+codes to PheWAS codes (a customized version of the ICD-9 hierarchy that
+groups together similar ICD-9 codes), and expands the table into a more
+useful format (shown below).
+
+There are several parameters that can be adjusted here; the example
+shows the simplest form of the function. Some examples:\\
+* Minimum code occurrence count (min.code.count, numeric): If the ICD-9
+code shows up fewer than N times for a given patient, it will be treated
+as if it isn't in the record at all. Defaults to 2.\\
+* Adding exclusions (add.exclusions, boolean): Each PheWAS code has a
+set of phenotypes with similar diagnoses. Excluding these from your
+analysis will give you a more specific way to control which phenotype
+you're observing, or to select controls that have sufficiently different
+phenotypes. (For instance, if you are observing patients with primary
+diabetes mellitus, secondary diabetes mellitus will be excluded.) These
+will appear as NA in your table rather than FALSE. Defaults to T. *
+Translate (translate, boolean): You may want to stick with ICD-9 codes
+and not use their PheWAS code hierarchy. If this is the case, set
+translate to F. Defaults to T.
+
+In order to use any of these parameters, just add them in after the
+primary, like so:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{phenotypes=}\KeywordTok{create_phewas_table}\NormalTok{(id.icd9.count,}\DataTypeTok{min.code.count=}\DecValTok{4}\NormalTok{,}\DataTypeTok{add.exclusions=}\NormalTok{F)}
+\end{Highlighting}
+\end{Shaded}
+
+sample\_n() works similarly to slice() in that it picks N rows from the
+dataset to show, but here, it picks N random rows instead of a specific
+range. (The {[},1:10{]} after it truncates the table to its first ten
+columns, since it's going to be a very wide table.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} phenotypes\PY{o}{=}create\PYZus{}phewas\PYZus{}table\PY{p}{(}id.icd9.count\PY{p}{)}
+        sample\PYZus{}n\PY{p}{(}phenotypes\PY{p}{,}\PY{l+m}{10}\PY{p}{)}\PY{p}{[}\PY{p}{,}\PY{l+m}{1}\PY{o}{:}\PY{l+m}{10}\PY{p}{]} \PY{c+c1}{\PYZsh{} Pick 10 random rows and show their first ten columns}
+\end{Verbatim}
+
+    \subsection{5. Running PheWAS Analysis}\label{running-phewas-analysis}
+
+Here is where the meat of the PheWAS function happens. Each of the
+possible phenotype associations for the provided SNP are tested for
+significance. There are two functions that can be used here:
+phewas\_with\_bonferroni() if the desired correction is bonferroni, or
+phewas\_with\_fdr() if the desired correction is FDR. (We use Bonferroni
+in this example.)
+
+The function will print a list of phenotypes that associate
+significantly with the SNP after correction, the p-value, and the PheWAS
+code. It will also list all of the ICD-9 codes that comprise the PheWAS
+code. If you are uninterested in the list of ICD-9, you can pass in an
+extra parameter called ``verbose'' to suppress this {[}like so:
+phewas\_with\_bonferroni(phenotypes,genotypes,verbose=FALSE){]}. Verbose
+defaults to TRUE, so you don't have to use it at all if you want to see
+that output.
+
+Challenge: Try running the function with the FDR correction. Do you see
+any differences in the results between Bonferroni and FDR?
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} results\PY{o}{=}phewas\PYZus{}with\PYZus{}bonferroni\PY{p}{(}phenotypes\PY{p}{,}genotypes\PY{p}{)}
+        sample\PYZus{}n\PY{p}{(}results\PY{p}{,}\PY{l+m}{10}\PY{p}{)}
+\end{Verbatim}
+
+    \subsection{6. Viewing Results}\label{viewing-results}
+
+\subsubsection{6a. Results: Plotting}\label{a.-results-plotting}
+
+Here we make a plot of how strongly associated our phenotypes are with
+the SNP we're looking at. The blue line is called the ``suggestive
+line''; it defaults to a p-value of 0.05. However, because of the large
+volume of comparisons we're making, that is actually not significant.
+Enter: the red line, which defaults to the suggestive line divided by
+the number of non-NA p-values. Phenotypes above the red line are
+labeled, as they are the most likely to have a significant correlation
+with the SNP.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} phewas\PYZus{}manhattan\PY{p}{(}results\PY{p}{)}
+\end{Verbatim}
+
+    \subsubsection{6b. Results: Manually Extracting
+Results}\label{b.-results-manually-extracting-results}
+
+Another way to look at the results - just printing the first ten lines.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} slice\PY{p}{(}results\PY{p}{,}\PY{l+m}{1}\PY{o}{:}\PY{l+m}{10}\PY{p}{)}
+\end{Verbatim}
+
+    We print out some more interesting information here. First, we filter
+the augmented results table to look at only phenotypes that were still
+significant after Bonferroni correction. Then, we look at the ten
+results with the lowest p-values.
+
+Challenge: Can you think of anything else you might like to look at? Try
+modifying the code below to print out the five results with the highest
+odds ratios (OR), for instance.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} filter\PY{p}{(}results\PY{p}{,}bonferroni\PY{o}{\PYZam{}}\PY{o}{!}\PY{k+kp}{is.na}\PY{p}{(}p\PY{p}{)}\PY{p}{)}
+        results\PY{p}{[}\PY{k+kp}{order}\PY{p}{(}results\PY{o}{\PYZdl{}}p\PY{p}{)}\PY{p}{[}\PY{l+m}{1}\PY{o}{:}\PY{l+m}{10}\PY{p}{]}\PY{p}{,}\PY{p}{]}
+\end{Verbatim}
+
+    \subsubsection{6c. Results: Built-In Summarization
+Function}\label{c.-results-built-in-summarization-function}
+
+We have also provided a few different summarization functions to write
+out summaries of the most significant phenotypes.
+
+summarization\_paragraph(): Writes out results in a paragraph form\\
+summarization\_list(): Writes out results in a list form\\
+summarization\_table(): Writes out results in a table\\
+summarization\_all(): Writes out the list of results and also outputs
+the Manhattan plot
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} summarization\PYZus{}all\PY{p}{(}phenotypes\PY{p}{,} genotypes\PY{p}{,} results\PY{p}{)}
+\end{Verbatim}
+
+    \subsection{7. Exercises}\label{exercises}
+
+We have provided three more example datasets - the code below will help
+you load them. Try writing your own code to run PheWAS on one or more of
+them - can you find a signal?
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} data\PY{p}{(}testset1\PY{p}{)} \PY{c+c1}{\PYZsh{} Load testset 1. }
+        genotypes\PY{o}{=}testset1\PY{o}{\PYZdl{}}genotypes \PY{c+c1}{\PYZsh{} Extract the genotypes}
+        id.icd9.count\PY{o}{=}testset1\PY{o}{\PYZdl{}}id.icd9.count \PY{c+c1}{\PYZsh{} Extract the ICD\PYZhy{}9 table}
+        genotypes\PY{p}{[}\PY{l+m}{1}\PY{o}{:}\PY{l+m}{10}\PY{p}{,}\PY{p}{]}
+        id.icd9.count\PY{p}{[}\PY{l+m}{1}\PY{o}{:}\PY{l+m}{10}\PY{p}{,}\PY{p}{]}
+        phenotypes\PY{o}{=}create\PYZus{}phewas\PYZus{}table\PY{p}{(}id.icd9.count\PY{p}{)} \PY{c+c1}{\PYZsh{} Create the PheWAS table}
+        results\PY{o}{=}phewas\PYZus{}with\PYZus{}bonferroni\PY{p}{(}phenotypes\PY{p}{,} genotypes\PY{p}{)} \PY{c+c1}{\PYZsh{} Run the PheWAS}
+        phewas\PYZus{}manhattan\PY{p}{(}results\PY{p}{)} \PY{c+c1}{\PYZsh{} Plot the results}
+        summarization\PYZus{}table\PY{p}{(}phenotypes\PY{p}{,}genotypes\PY{p}{,}results\PY{p}{)}
+        summarization\PYZus{}paragraph\PY{p}{(}phenotypes\PY{p}{,}genotypes\PY{p}{,}results\PY{p}{)}
+        summarization\PYZus{}all\PY{p}{(}phenotypes\PY{p}{,}genotypes\PY{p}{,}results\PY{p}{)}
+        filter\PY{p}{(}results\PY{p}{,}bonferroni\PY{o}{\PYZam{}}\PY{o}{!}\PY{k+kp}{is.na}\PY{p}{(}p\PY{p}{)}\PY{p}{)} \PY{c+c1}{\PYZsh{} List the significant results}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} ex2\PY{o}{=}data\PY{p}{(}testset2\PY{p}{)} \PY{c+c1}{\PYZsh{} Load testset 2}
+        \PY{c+c1}{\PYZsh{} Extract the genotypes}
+        \PY{c+c1}{\PYZsh{} Extract the ICD\PYZhy{}9 table}
+        \PY{c+c1}{\PYZsh{} Create the PheWAS table}
+        \PY{c+c1}{\PYZsh{} Run the PheWAS}
+        \PY{c+c1}{\PYZsh{} Plot the results}
+        \PY{c+c1}{\PYZsh{} Add PheWAS descriptions}
+        \PY{c+c1}{\PYZsh{} List the significant results, using whatever method you like best}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} ex3\PY{o}{=}data\PY{p}{(}testset3\PY{p}{)} \PY{c+c1}{\PYZsh{} Load testset 3 \PYZhy{} the rest is up to you!}
+\end{Verbatim}
+
+    \subsection{Appendix: Converting ICD-9 Codes to PheWAS
+Codes}\label{appendix-converting-icd-9-codes-to-phewas-codes}
+
+If you'd like to convert an ICD-9 code to a PheWAS code, use the
+get\_icd9\_codes() function (below). For each code in the input list, it
+will output a list of PheWAS codes which include that ICD-9 code - you
+can choose which one best describes what you're looking for.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} get\PYZus{}icd9\PYZus{}codes\PY{p}{(}icd9\PYZus{}query\PY{o}{=}\PY{k+kt}{c}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{088.81\PYZdq{}}\PY{p}{,} \PY{l+s}{\PYZdq{}}\PY{l+s}{327\PYZdq{}}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}

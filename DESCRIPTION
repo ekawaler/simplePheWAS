@@ -6,5 +6,7 @@ Date: 2016-03-22
 Authors@R: person("Emily", "Kawaler", email = "eak489@nyu.edu", role = c("aut", "cre"))
 Description: More about what it does (maybe more than one line)
 License: What license is it under?
-Depends: PheWAS
+Depends:
+    PheWAS
 LazyData: TRUE
+RoxygenNote: 5.0.1

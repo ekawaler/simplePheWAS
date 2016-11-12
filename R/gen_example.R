@@ -5,7 +5,10 @@
 # I don't recommend using more than 3 PheWAS codes, though.
 
 gen_example <- function(n=2000,phenotypes.per=10, hit=c("335")) {
-  phewas_code <- unique(phemap$phewas_code)
+  #hit=c("335")
+  #n=2000
+  #phenotypes.per=10
+  phewas_code <- unique(phemap$phecode)
   ps <- length(hit)
   #Exclude the code to add
   phewas_code <- phewas_code[!(phewas_code %in% hit)]
