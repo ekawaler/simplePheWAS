@@ -1,3 +1,4 @@
+#' @export
 # For generating example data. Basically just transforms the variable names
 # to call gen_example. Might remove this all together later.
 

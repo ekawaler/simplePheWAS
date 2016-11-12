@@ -1,3 +1,4 @@
+#' @export
 # The same as phenotypePlot, but uses ggrepel to keep labels from overlapping.
 
 phenotype_plot <-

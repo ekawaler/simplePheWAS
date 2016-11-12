@@ -1,3 +1,4 @@
+#' @export
 # Called by generate_example.
 # The difference between this and generateExample is that this allows the user to
 # have either no signal or have signals for as many PheWAS codes as they'd like, whereas

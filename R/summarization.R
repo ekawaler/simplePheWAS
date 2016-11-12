@@ -1,3 +1,4 @@
+#' @export
 # Outputs a nicely formatted summary of results.
 
 summarization_paragraph <- function(phenotypes, genotypes, results){

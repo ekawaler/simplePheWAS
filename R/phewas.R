@@ -1,3 +1,4 @@
+#' @export
 # The actual PheWAS functions.
 # Can either use Bonferroni correction, FDR correction, or both,
 # depending on which function is called.

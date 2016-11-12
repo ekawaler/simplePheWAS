@@ -1,3 +1,4 @@
+#' @export
 # Runs through an example workflow
 
 ex_function <- function(){

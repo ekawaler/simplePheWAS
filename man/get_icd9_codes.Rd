@@ -18,6 +18,7 @@ ICD-9 code(s) of interest.
 }
 \examples{
 get_icd9_codes()
+get_icd9_codes(c("088.81","335"))
 
 }
 

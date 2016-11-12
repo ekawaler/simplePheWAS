@@ -1,3 +1,4 @@
+#' @export
 # Calls phewasManhattan, is just here for naming consistency
 
 phewas_manhattan <-

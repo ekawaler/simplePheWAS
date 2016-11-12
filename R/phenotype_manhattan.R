@@ -1,3 +1,4 @@
+#' @export
 # Makes the Manhattan plot. Basically the only difference from phenotypeManhattan is that
 # it calls the altered version of phenotype_plot (keeps point labels from overlapping)
 

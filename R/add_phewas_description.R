@@ -7,6 +7,8 @@
 #' @param data Data frame containing the attribute with PheWAS codes. Can additionally be a character vector of PheWAS codes. See details for requirements.
 #' @param keep.unmatched.rows Keep rows that have no matching PheWAS descriptions? This is passed into keep.y in \code{merge}.
 #' @param for.plots Renames the output to include "phenotype" and "description". Default is \code{FALSE}.
+#'
+#' @export
 
 add_phewas_description <- function(data, keep.unmatched.rows=F,for.plots=F) {
   if(class(data)[1] %in% c("character", "factor")) {data=data.frame(phenotype=data,stringsAsFactors=F)}
