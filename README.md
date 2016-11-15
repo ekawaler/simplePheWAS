@@ -1,3 +1,3 @@
 # simplePheWAS
 
-Temporarily out of service - broke it while preparing for AMIA. Watch this space!
+Temporarily out of service - broke it while preparing for AMIA. (Never make changes the night before a conference.) Watch this space!
